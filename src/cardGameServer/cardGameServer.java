@@ -48,20 +48,15 @@ class handleClient implements Runnable {
 				cardArray[i] = tempNo;
 			}
 			while(true) {
-				int playerCards = 0;
-				int requestCards = in.readInt();
-				if (requestCards == 1) {
-					for (int i = 1; i < 2; i++) {
-					playerCards = cardArray[i];
-					cardArray.splice(start, i);
-					i--;
-					
+				if (in.readInt() == 1) {
+					out.writeInt(cardArray[0]);
+					System.out.println("sent");
 					}
+				
 			}
-		} 
+		 
 		}catch (IOException ex) {
 			System.out.println(ex);
 		}
 	}
-}
 }
