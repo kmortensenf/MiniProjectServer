@@ -66,6 +66,10 @@ class handleClient implements Runnable {
 					System.out.println("Hit requested");
 					out.writeInt(cardArray[5]);
 				}
+				if (in.readInt() == 3) {
+					System.out.println("Hit requested 3");
+					out.writeInt(cardArray[6]);
+				}
 			}	
 		 
 		}catch (IOException ex) {
