@@ -1,5 +1,4 @@
-package cardGameServer;
-
+	
 import java.io.DataInputStream;
 import java.io.DataOutputStream;
 import java.io.IOException;
@@ -7,13 +6,13 @@ import java.net.ServerSocket;
 import java.net.Socket;
 import java.util.*;
 
-public class cardGameServer {
+public class testerServer {
 	
 	public static void main(String [] args) throws IOException {
 			new Thread( () -> {
 				int clientNo = 0;
 			try {
-				ServerSocket serverSocket = new ServerSocket(8085);
+				ServerSocket serverSocket = new ServerSocket(8086);
 				while(true) {
 					Socket socket = serverSocket.accept();
 					
@@ -34,26 +33,40 @@ class handleClient implements Runnable {
 	private Socket socket;
 	Random random = new Random();
 	
+	
 	public handleClient(Socket socket) {	
 		this.socket = socket;
 	}
 	public void run() {
+		
 		try {
 			DataInputStream in = new DataInputStream(socket.getInputStream());
 			DataOutputStream out = new DataOutputStream(socket.getOutputStream());
-			for (int i = 0; i < cardArray.length; i++) {
+			for (int i = 1; i < cardArray.length; i++) {
 				int shuffle = random.nextInt(cardArray.length-i) + i;
 				int tempNo = cardArray[shuffle];
 				cardArray[shuffle] = cardArray[i];
 				cardArray[i] = tempNo;
 			}
+			System.out.println("Run once");
 			while(true) {
 				if (in.readInt() == 1) {
+					System.out.println("Dealing cards");
 					out.writeInt(cardArray[0]);
-					System.out.println("sent");
-					}
-				
-			}
+					out.writeInt(cardArray[1]);
+					out.writeInt(cardArray[2]);
+					out.writeInt(cardArray[3]);
+					
+				}
+				if (in.readInt() == 2) {
+					System.out.println("Hit requested");
+					out.writeInt(cardArray[4]);
+				}
+				if (in.readInt() == 2) {
+					System.out.println("Hit requested");
+					out.writeInt(cardArray[5]);
+				}
+			}	
 		 
 		}catch (IOException ex) {
 			System.out.println(ex);
