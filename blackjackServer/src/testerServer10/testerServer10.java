@@ -44,7 +44,10 @@ class handleClient implements Runnable {
 	int dealerCard1;
 	int dealerCard2;
 	int dealerCard3;
+	int dealerCard4;
+	int dealerCard5;
 	int dealerCards;
+	int dealerCard1Value;
 	int x = 0;
 	int hits = 0;
 	boolean taken[] = new boolean[52];
@@ -93,6 +96,7 @@ class handleClient implements Runnable {
 					playerCard2 = cardNumber[x++];
 					playerCards = cardValue[playerCard1] + cardValue[playerCard2];
 					dealerCard1 = cardNumber[x++];
+					dealerCard1Value = cardValue[dealerCard1];
 					dealerCard2 = cardNumber[x++];
 					dealerCards = cardValue[dealerCard1] + cardValue[dealerCard2];
 				
@@ -115,15 +119,18 @@ class handleClient implements Runnable {
 					} if (dealerCards == 22) {
 					dealerCards = dealerCards - 10;
 					out.writeInt(dealerCard1);
+					out.writeInt(dealerCard1Value);
 					out.writeInt(dealerCard2);
 					out.writeInt(dealerCards);
 					} else if (playerCards == 21) {
 					out.writeInt(dealerCard1);
+					out.writeInt(dealerCard1Value);
 					out.writeInt(dealerCard2);
 					out.writeInt(dealerCards);
 					} else {
 					dealerCards = dealerCards;
 					out.writeInt(dealerCard1);
+					out.writeInt(dealerCard1Value);
 					out.writeInt(dealerCard2);
 					out.writeInt(dealerCards);
 					}
@@ -204,9 +211,11 @@ class handleClient implements Runnable {
 				}
 			
 				if (response == 3 && dealerCards < 17) {
+					if (dealerCard3 == 0) {
 					dealerCard3 = cardNumber[x++];
 					System.out.println("total value dealer before adding: " + dealerCards);
 					dealerCards = dealerCards + cardValue[dealerCard3];
+					System.out.println("after 3rd dealer card: " + dealerCards);
 					int aces = 0;
 					if (dealerCard3 == 12 || dealerCard3 == 25 || dealerCard3 == 38 || dealerCard3 == 51) {
 						aces++;
@@ -217,20 +226,50 @@ class handleClient implements Runnable {
 						out.writeInt(dealerCard3);
 						out.writeInt(dealerCards);
 					} else {
-						System.out.println("total value dealer before x2: " + dealerCards);
 						dealerCards = dealerCards;
-						System.out.println("total value dealer after x2: " + dealerCards);
 						out.writeInt(dealerCard3);
 						out.writeInt(dealerCards);
-						System.out.println("total value dealer after x4: " + dealerCards);
 					}
-					System.out.println("Stand requested");
-					System.out.println("3rd card number: " + dealerCard3);
-					System.out.println("3rd card value: " + cardValue[dealerCard3]);
-					System.out.println("total value dealer: " + dealerCards);
+				} else if (dealerCard3 != 0 && dealerCard4 == 0) {
+					dealerCard4 = cardNumber[x++];
+					System.out.println("total value dealer before adding: " + dealerCards);
+					dealerCards = dealerCards + cardValue[dealerCard4];
+					System.out.println("after 4th dealer card: " + dealerCards);
+					int aces = 0;
+					if (dealerCard4 == 12 || dealerCard4 == 25 || dealerCard4 == 38 || dealerCard4 == 51) {
+						aces++;
+					}
+					if (dealerCards > 21 && aces > 0) {
+						dealerCards = dealerCards - 10;
+						aces--;
+						out.writeInt(dealerCard4);
+						out.writeInt(dealerCards);
+					} else {
+						dealerCards = dealerCards;
+						out.writeInt(dealerCard4);
+						out.writeInt(dealerCards);
+					}
+				} else {
+					dealerCard5 = cardNumber[x++];
+					System.out.println("total value dealer before adding: " + dealerCards);
+					dealerCards = dealerCards + cardValue[dealerCard5];
+					System.out.println("after 5th dealer card: " + dealerCards);
+					int aces = 0;
+					if (dealerCard5 == 12 || dealerCard5 == 25 || dealerCard5 == 38 || dealerCard5 == 51) {
+						aces++;
+					}
+					if (dealerCards > 21 && aces > 0) {
+						dealerCards = dealerCards - 10;
+						aces--;
+						out.writeInt(dealerCard5);
+						out.writeInt(dealerCards);
+					} else {
+						dealerCards = dealerCards;
+						out.writeInt(dealerCard5);
+						out.writeInt(dealerCards);
+					}
 				}
-			
-	
+				}
 		}
 	} catch (Exception e) {
 			e.printStackTrace();
