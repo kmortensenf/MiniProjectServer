@@ -16,12 +16,18 @@ public class testerServer10 {
 		try {
 			ServerSocket serverSocket = new ServerSocket(8087);
 			while(true) {
-				Socket socket = serverSocket.accept();
-				
-				clientNo++;
-				System.out.println(clientNo);
+				if (clientNo < 4) {
+					Socket socket = serverSocket.accept();
+
+					clientNo++;
+					System.out.println("client " + clientNo + " connected");
+					new Thread(new handleClient(socket)).start();
+				}
+				else {
+					serverSocket.close();
+				}
 			
-		new Thread(new handleClient(socket)).start();
+
 			}
 		} catch(IOException ex) {
 			System.out.println(ex);
