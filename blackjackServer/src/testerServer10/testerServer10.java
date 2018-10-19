@@ -26,8 +26,6 @@ public class testerServer10 {
 				else {
 					serverSocket.close();
 				}
-			
-
 			}
 		} catch(IOException ex) {
 			System.out.println(ex);
@@ -66,16 +64,7 @@ class handleClient implements Runnable {
 	try {
 		DataInputStream in = new DataInputStream(socket.getInputStream());
 		DataOutputStream out = new DataOutputStream(socket.getOutputStream());
-		/*for (int i = 0; i < cardNumber.length; i++) {
-			int shuffle = random.nextInt(cardNumber.length-i) + i;
-			int tempNo = cardNumber[shuffle];
-			cardNumber[shuffle] = cardNumber[i];
-			cardNumber[i] = tempNo;
-			System.out.println("int shuffle: " + shuffle);
-			System.out.println("int tempNo: " + tempNo);
-			System.out.println("cardnumber i " + cardNumber[i]);
-			
-		}*/
+		
 		shuffleDeck(taken);
 		System.out.println("Run once");
 		while(true) {
@@ -121,7 +110,6 @@ class handleClient implements Runnable {
 					out.writeInt(playerCard2);
 					out.writeInt(playerCards);
 				
-				
 					} if (dealerCards == 22) {
 					dealerCards = dealerCards - 10;
 					out.writeInt(dealerCard1);
@@ -140,17 +128,8 @@ class handleClient implements Runnable {
 					out.writeInt(dealerCard2);
 					out.writeInt(dealerCards);
 					}
-					System.out.println("Dealing cards");
-					System.out.println("First player card: " + playerCard1);
-					System.out.println("First dealer card: " + dealerCard1);
-					System.out.println("Second player card: " + playerCard2);
-					System.out.println("Second dealer card: " + dealerCard2);
-					System.out.println("Player - Total value: " + playerCards);
-					System.out.println("Dealer - Total value: " + dealerCards);
 				}
 				
-				
-
 				if (response == 2 && playerCards < 21 && hits == 0) {
 					hits++;
 					playerCard3 = cardNumber[x++];
@@ -169,9 +148,7 @@ class handleClient implements Runnable {
 					out.writeInt(playerCard3);
 					out.writeInt(playerCards);
 					}
-				System.out.println("Hit requested 1");
-				System.out.println(playerCard3);
-				System.out.println(playerCards);
+					System.out.println("Hit requested 1");
 				}
 			
 				else if (response == 2 && playerCards < 21 && hits == 1) {
@@ -280,8 +257,7 @@ class handleClient implements Runnable {
 	} catch (Exception e) {
 			e.printStackTrace();
 		}
-	
-}
+	}
 	
 	public int drawCard(boolean [] taken) throws IOException {
 		int i = random.nextInt(52);
@@ -298,11 +274,4 @@ class handleClient implements Runnable {
 		}
 		System.out.println(Arrays.toString(cardNumber));
 	}
-	
-	public void methodTest() {
-		System.out.println("Testing reset method call");
-	}
 }
-
-
-
