@@ -1,10 +1,21 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
+<<<<<<< HEAD
     <list default="true" id="df306e7a-26e8-4188-9c25-b9f23cb2a1bc" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/bin/testerServer10/handleClient.class" beforeDir="false" afterPath="$PROJECT_DIR$/bin/testerServer10/handleClient.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/bin/testerServer10/testerServer10.class" beforeDir="false" afterPath="$PROJECT_DIR$/bin/testerServer10/testerServer10.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/testerServer10/testerServer10.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/testerServer10/testerServer10.java" afterDir="false" />
+=======
+    <list default="true" id="beb82621-fbee-498c-809f-9004167f27d8" name="Default Changelist" comment="">
+      <change afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/vcs.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/blackjackServer.iml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/bin/testerServer10/handleClient.class" beforeDir="false" afterPath="$PROJECT_DIR$/bin/testerServer10/handleClient.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/bin/testerServer10/testerServer10.class" beforeDir="false" afterPath="$PROJECT_DIR$/bin/testerServer10/testerServer10.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/testerServer10/testerServer10.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/testerServer10/testerServer10.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../testerServer/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../testerServer/.idea/workspace.xml" afterDir="false" />
+>>>>>>> 7bd365a6ac2a03735239491fe2ef1ca1e90c5585
     </list>
     <ignored path="$PROJECT_DIR$/bin/" />
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
@@ -14,6 +25,7 @@
     <option name="LAST_RESOLUTION" value="IGNORE" />
   </component>
   <component name="FUSProjectUsageTrigger">
+<<<<<<< HEAD
     <session id="-1543844138">
       <usages-collector id="statistics.lifecycle.project">
         <counts>
@@ -21,6 +33,17 @@
           <entry key="project.open.time.1" value="1" />
           <entry key="project.open.time.3" value="1" />
           <entry key="project.opened" value="2" />
+=======
+    <session id="253370850">
+      <usages-collector id="statistics.lifecycle.project">
+        <counts>
+          <entry key="project.closed" value="4" />
+          <entry key="project.open.time.1" value="1" />
+          <entry key="project.open.time.12" value="1" />
+          <entry key="project.open.time.36" value="1" />
+          <entry key="project.open.time.4" value="1" />
+          <entry key="project.opened" value="4" />
+>>>>>>> 7bd365a6ac2a03735239491fe2ef1ca1e90c5585
         </counts>
       </usages-collector>
       <usages-collector id="statistics.file.extensions.open">
@@ -35,12 +58,20 @@
       </usages-collector>
       <usages-collector id="statistics.file.extensions.edit">
         <counts>
+<<<<<<< HEAD
           <entry key="java" value="361" />
+=======
+          <entry key="java" value="104" />
+>>>>>>> 7bd365a6ac2a03735239491fe2ef1ca1e90c5585
         </counts>
       </usages-collector>
       <usages-collector id="statistics.file.types.edit">
         <counts>
+<<<<<<< HEAD
           <entry key="JAVA" value="361" />
+=======
+          <entry key="JAVA" value="104" />
+>>>>>>> 7bd365a6ac2a03735239491fe2ef1ca1e90c5585
         </counts>
       </usages-collector>
     </session>
@@ -50,12 +81,17 @@
       <file pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/src/testerServer10/testerServer10.java">
           <provider selected="true" editor-type-id="text-editor">
+<<<<<<< HEAD
             <state relative-caret-position="419">
               <caret line="137" column="46" lean-forward="true" selection-start-line="137" selection-start-column="46" selection-end-line="137" selection-end-column="46" />
               <folding>
                 <element signature="e#2229#2230#0" expanded="true" />
                 <element signature="e#2257#2258#0" expanded="true" />
               </folding>
+=======
+            <state relative-caret-position="374">
+              <caret line="27" column="17" lean-forward="true" selection-start-line="27" selection-start-column="17" selection-end-line="27" selection-end-column="17" />
+>>>>>>> 7bd365a6ac2a03735239491fe2ef1ca1e90c5585
             </state>
           </provider>
         </entry>
@@ -78,11 +114,19 @@
     <detection-done>true</detection-done>
     <sorting>DEFINITION_ORDER</sorting>
   </component>
+<<<<<<< HEAD
   <component name="ProjectFrameBounds" extendedState="6">
     <option name="x" value="223" />
     <option name="y" value="46" />
     <option name="width" value="1400" />
     <option name="height" value="1019" />
+=======
+  <component name="ProjectFrameBounds">
+    <option name="x" value="177" />
+    <option name="y" value="111" />
+    <option name="width" value="1400" />
+    <option name="height" value="883" />
+>>>>>>> 7bd365a6ac2a03735239491fe2ef1ca1e90c5585
   </component>
   <component name="ProjectLevelVcsManager" settingsEditedManually="true" />
   <component name="ProjectView">
@@ -90,8 +134,13 @@
       <foldersAlwaysOnTop value="true" />
     </navigator>
     <panes>
+<<<<<<< HEAD
       <pane id="PackagesPane" />
       <pane id="Scope" />
+=======
+      <pane id="Scope" />
+      <pane id="PackagesPane" />
+>>>>>>> 7bd365a6ac2a03735239491fe2ef1ca1e90c5585
       <pane id="ProjectPane">
         <subPane>
           <expand>
@@ -102,6 +151,14 @@
             <path>
               <item name="blackjackServer" type="b2602c69:ProjectViewProjectNode" />
               <item name="blackjackServer" type="462c0819:PsiDirectoryNode" />
+<<<<<<< HEAD
+=======
+              <item name="bin" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="blackjackServer" type="b2602c69:ProjectViewProjectNode" />
+              <item name="blackjackServer" type="462c0819:PsiDirectoryNode" />
+>>>>>>> 7bd365a6ac2a03735239491fe2ef1ca1e90c5585
               <item name="src" type="462c0819:PsiDirectoryNode" />
             </path>
             <path>
@@ -119,11 +176,19 @@
   <component name="PropertiesComponent">
     <property name="WebServerToolWindowFactoryState" value="false" />
     <property name="aspect.path.notification.shown" value="true" />
+<<<<<<< HEAD
     <property name="com.android.tools.idea.instantapp.provision.ProvisionBeforeRunTaskProvider.myTimeStamp" value="1539960861788" />
     <property name="last_opened_file_path" value="$PROJECT_DIR$" />
     <property name="nodejs_interpreter_path.stuck_in_default_project" value="undefined stuck path" />
     <property name="nodejs_npm_path_reset_for_default_project" value="true" />
     <property name="settings.editor.selected.configurable" value="preferences.pluginManager" />
+=======
+    <property name="com.android.tools.idea.instantapp.provision.ProvisionBeforeRunTaskProvider.myTimeStamp" value="1539935279944" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$" />
+    <property name="nodejs_interpreter_path.stuck_in_default_project" value="undefined stuck path" />
+    <property name="nodejs_npm_path_reset_for_default_project" value="true" />
+    <property name="settings.editor.selected.configurable" value="preferences.customizations" />
+>>>>>>> 7bd365a6ac2a03735239491fe2ef1ca1e90c5585
   </component>
   <component name="RunDashboard">
     <option name="ruleStates">
@@ -162,6 +227,7 @@
   </component>
   <component name="TaskManager">
     <task active="true" id="Default" summary="Default task">
+<<<<<<< HEAD
       <changelist id="df306e7a-26e8-4188-9c25-b9f23cb2a1bc" name="Default Changelist" comment="" />
       <created>1539715045090</created>
       <option name="number" value="Default" />
@@ -169,10 +235,22 @@
       <updated>1539715045090</updated>
       <workItem from="1539715049436" duration="854000" />
       <workItem from="1539958734854" duration="2045000" />
+=======
+      <changelist id="beb82621-fbee-498c-809f-9004167f27d8" name="Default Changelist" comment="" />
+      <created>1539780864856</created>
+      <option name="number" value="Default" />
+      <option name="presentableId" value="Default" />
+      <updated>1539780864856</updated>
+      <workItem from="1539780869286" duration="1254000" />
+      <workItem from="1539789606504" duration="24000" />
+      <workItem from="1539933892054" duration="481000" />
+      <workItem from="1539934936601" duration="354000" />
+>>>>>>> 7bd365a6ac2a03735239491fe2ef1ca1e90c5585
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
+<<<<<<< HEAD
     <option name="totallyTimeSpent" value="2899000" />
   </component>
   <component name="ToolWindowManager">
@@ -180,6 +258,14 @@
     <editor active="true" />
     <layout>
       <window_info content_ui="combo" id="Project" order="0" visible="true" weight="0.18017058" />
+=======
+    <option name="totallyTimeSpent" value="2113000" />
+  </component>
+  <component name="ToolWindowManager">
+    <frame x="177" y="111" width="1400" height="883" extended-state="0" />
+    <layout>
+      <window_info content_ui="combo" id="Project" order="0" visible="true" weight="0.26119402" />
+>>>>>>> 7bd365a6ac2a03735239491fe2ef1ca1e90c5585
       <window_info id="Structure" order="1" side_tool="true" weight="0.25" />
       <window_info id="Image Layers" order="2" />
       <window_info id="Designer" order="3" />
@@ -188,7 +274,11 @@
       <window_info id="Favorites" order="6" side_tool="true" />
       <window_info anchor="bottom" id="Message" order="0" />
       <window_info anchor="bottom" id="Find" order="1" />
+<<<<<<< HEAD
       <window_info anchor="bottom" id="Run" order="2" weight="0.30911064" />
+=======
+      <window_info anchor="bottom" id="Run" order="2" weight="0.32977304" />
+>>>>>>> 7bd365a6ac2a03735239491fe2ef1ca1e90c5585
       <window_info anchor="bottom" id="Debug" order="3" weight="0.4" />
       <window_info anchor="bottom" id="Cvs" order="4" weight="0.25" />
       <window_info anchor="bottom" id="Inspection" order="5" weight="0.4" />
@@ -218,12 +308,17 @@
   <component name="editorHistoryManager">
     <entry file="file://$PROJECT_DIR$/src/testerServer10/testerServer10.java">
       <provider selected="true" editor-type-id="text-editor">
+<<<<<<< HEAD
         <state relative-caret-position="419">
           <caret line="137" column="46" lean-forward="true" selection-start-line="137" selection-start-column="46" selection-end-line="137" selection-end-column="46" />
           <folding>
             <element signature="e#2229#2230#0" expanded="true" />
             <element signature="e#2257#2258#0" expanded="true" />
           </folding>
+=======
+        <state relative-caret-position="374">
+          <caret line="27" column="17" lean-forward="true" selection-start-line="27" selection-start-column="17" selection-end-line="27" selection-end-column="17" />
+>>>>>>> 7bd365a6ac2a03735239491fe2ef1ca1e90c5585
         </state>
       </provider>
     </entry>
