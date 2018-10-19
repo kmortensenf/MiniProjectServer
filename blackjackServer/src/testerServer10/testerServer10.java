@@ -12,16 +12,51 @@ public class testerServer10 {
 
 	public static void main(String [] args) throws IOException {
 		new Thread( () -> {
-			int clientNo = 0;
+            int clientNo = 0;
 		try {
 			ServerSocket serverSocket = new ServerSocket(8087);
 			while(true) {
-				Socket socket = serverSocket.accept();
-				
-				clientNo++;
-				System.out.println(clientNo);
-			
-		new Thread(new handleClient(socket)).start();
+				if (clientNo < 4) {
+				    if (clientNo==0) {
+
+
+                        Socket socket1 = serverSocket.accept();
+
+                        clientNo++;
+                        System.out.println("Player: " + clientNo + " joined the game");
+
+                        new Thread(new handleClient(socket1)).start();
+                    }
+                    if (clientNo==1) {
+
+
+                        Socket socket2 = serverSocket.accept();
+
+                        clientNo++;
+                        System.out.println("Player: " + clientNo + " joined the game");
+
+                        new Thread(new handleClient(socket2)).start();
+                    }
+                    if (clientNo==2) {
+
+
+                        Socket socket3 = serverSocket.accept();
+
+                        clientNo++;
+                        System.out.println("Player: " + clientNo + " joined the game");
+
+                        new Thread(new handleClient(socket3)).start();
+                    }
+                    if (clientNo > 2){
+                        Socket socket3 = serverSocket.accept();
+
+                        socket3.close();
+
+
+                    }
+
+				}
+
 			}
 		} catch(IOException ex) {
 			System.out.println(ex);
@@ -49,7 +84,7 @@ class handleClient implements Runnable {
 	int hits = 0;
 	boolean taken[] = new boolean[52];
 
-	public handleClient(Socket socket) {	
+	public handleClient(Socket socket) {
 	this.socket = socket;
 	}
 	
@@ -67,6 +102,7 @@ class handleClient implements Runnable {
 			System.out.println("cardnumber i " + cardNumber[i]);
 			
 		}*/
+
 		shuffleDeck(taken);
 		System.out.println("Run once");
 		while(true) {
