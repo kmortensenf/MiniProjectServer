@@ -16,59 +16,15 @@ public class testerServer10 {
 		try {
 			ServerSocket serverSocket = new ServerSocket(8087);
 			while(true) {
-				if (clientNo < 4) {
-<<<<<<< HEAD
-				    if (clientNo==0) {
-
-
-                        Socket socket1 = serverSocket.accept();
-
-                        clientNo++;
-                        System.out.println("Player: " + clientNo + " joined the game");
-
-                        new Thread(new handleClient(socket1)).start();
-                    }
-                    if (clientNo==1) {
-
-
-                        Socket socket2 = serverSocket.accept();
-
-                        clientNo++;
-                        System.out.println("Player: " + clientNo + " joined the game");
-
-                        new Thread(new handleClient(socket2)).start();
-                    }
-                    if (clientNo==2) {
-
-
-                        Socket socket3 = serverSocket.accept();
-
-                        clientNo++;
-                        System.out.println("Player: " + clientNo + " joined the game");
-
-                        new Thread(new handleClient(socket3)).start();
-                    }
-                    if (clientNo > 2){
-                        Socket socket3 = serverSocket.accept();
-
-                        socket3.close();
-
-
-                    }
-
-				}
-
-=======
+				if (clientNo < 3) {
 					Socket socket = serverSocket.accept();
-
 					clientNo++;
-					System.out.println("client " + clientNo + " connected");
-					new Thread(new handleClient(socket)).start();
-				}
-				else {
+					System.out.println("Player " + clientNo + " joined the game\nPlayer " + clientNo + " IP address: " + socket.getInetAddress().getHostAddress());
+					new DataOutputStream(socket.getOutputStream()).writeInt(clientNo);
+					new Thread(new handleClient(socket,clientNo)).start();
+				} else {
 					serverSocket.close();
 				}
->>>>>>> 7bd365a6ac2a03735239491fe2ef1ca1e90c5585
 			}
 		} catch(IOException ex) {
 			System.out.println(ex);
@@ -78,10 +34,19 @@ public class testerServer10 {
 }
 
 class handleClient implements Runnable {
-	Integer [] cardNumber = {0,1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21,22,23,24,25,26,27,28,29,30,31,32,33,34,35,36,37,38,39,40,41,42,43,44,45,46,47,48,49,50,51};
-	Integer [] cardValue = {2,3,4,5,6,7,8,9,10,10,10,10,11,2,3,4,5,6,7,8,9,10,10,10,10,11,2,3,4,5,6,7,8,9,10,10,10,10,11,2,3,4,5,6,7,8,9,10,10,10,10,11};
+	int [] cardNumber = {0,1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21,22,23,24,25,26,27,28,29,30,31,32,33,34,35,36,37,38,39,40,41,42,43,44,45,46,47,48,49,50,51};
+	int [] cardValue = {2,3,4,5,6,7,8,9,10,10,10,10,11,2,3,4,5,6,7,8,9,10,10,10,10,11,2,3,4,5,6,7,8,9,10,10,10,10,11,2,3,4,5,6,7,8,9,10,10,10,10,11};
 	private Socket socket;
+	private int clientNo;
 	Random random = new Random();
+	int [] player1Cards = new int[13];
+	int [] player2Cards = new int[13];
+	int [] player3Cards = new int[13];
+	int [] dealerCards1 = new int[13];
+	int player1CardsValue;
+	int player2CardsValue;
+	int player3CardsValue;
+	int dealerCardsValue;
 	int playerCard1;
 	int playerCard2;
 	int playerCard3;
@@ -99,31 +64,19 @@ class handleClient implements Runnable {
 	int hits = 0;
 	boolean taken[] = new boolean[52];
 
-	public handleClient(Socket socket) {
+	public handleClient(Socket socket, int clientNo) {
 	this.socket = socket;
+	this.clientNo = clientNo;
 	}
 	
 	public void run() {
 	try {
 		DataInputStream in = new DataInputStream(socket.getInputStream());
 		DataOutputStream out = new DataOutputStream(socket.getOutputStream());
-<<<<<<< HEAD
-		/*for (int i = 0; i < cardNumber.length; i++) {
-			int shuffle = random.nextInt(cardNumber.length-i) + i;
-			int tempNo = cardNumber[shuffle];
-			cardNumber[shuffle] = cardNumber[i];
-			cardNumber[i] = tempNo;
-			System.out.println("int shuffle: " + shuffle);
-			System.out.println("int tempNo: " + tempNo);
-			System.out.println("cardnumber i " + cardNumber[i]);
-			
-		}*/
-
-=======
-		
->>>>>>> 7bd365a6ac2a03735239491fe2ef1ca1e90c5585
-		shuffleDeck(taken);
 		System.out.println("Run once");
+		System.out.println(clientNo);
+		out.writeInt(clientNo);
+		
 		while(true) {
 				int response = in.readInt();
 				if (response == 0) {
@@ -330,5 +283,19 @@ class handleClient implements Runnable {
 			cardNumber[i] = drawCard(taken);
 		}
 		System.out.println(Arrays.toString(cardNumber));
+	}
+	
+	public void assignCards(int[] array1,int[] array2,int[] array3,int[] array4) throws IOException {
+		int j = 0;
+		for (int i = 0; i < 13; i++) {
+			array1[i] = cardNumber[j++];
+			array2[i] = cardNumber[j++];
+			array3[i] = cardNumber[j++];
+			array4[i] = cardNumber[j++];
+		}
+		System.out.println(Arrays.toString(player1Cards));
+		System.out.println(Arrays.toString(player2Cards));
+		System.out.println(Arrays.toString(player3Cards));
+		System.out.println(Arrays.toString(dealerCards1));
 	}
 }
