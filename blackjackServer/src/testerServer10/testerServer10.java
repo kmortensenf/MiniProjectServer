@@ -33,36 +33,9 @@ public class testerServer10 {
 	}
 }
 
-class handleClient implements Runnable {
-	int [] cardNumber = {0,1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21,22,23,24,25,26,27,28,29,30,31,32,33,34,35,36,37,38,39,40,41,42,43,44,45,46,47,48,49,50,51};
-	int [] cardValue = {2,3,4,5,6,7,8,9,10,10,10,10,11,2,3,4,5,6,7,8,9,10,10,10,10,11,2,3,4,5,6,7,8,9,10,10,10,10,11,2,3,4,5,6,7,8,9,10,10,10,10,11};
+class handleClient extends clientServer implements Runnable{
 	private Socket socket;
 	private int clientNo;
-	Random random = new Random();
-	int [] player1Cards = new int[13];
-	int [] player2Cards = new int[13];
-	int [] player3Cards = new int[13];
-	int [] dealerCards1 = new int[13];
-	int player1CardsValue;
-	int player2CardsValue;
-	int player3CardsValue;
-	int dealerCardsValue;
-	int playerCard1;
-	int playerCard2;
-	int playerCard3;
-	int playerCard4;
-	int playerCard5;
-	int playerCards;
-	int dealerCard1;
-	int dealerCard2;
-	int dealerCard3;
-	int dealerCard4;
-	int dealerCard5;
-	int dealerCards;
-	int dealerCard1Value;
-	int x = 0;
-	int hits = 0;
-	boolean taken[] = new boolean[52];
 
 	public handleClient(Socket socket, int clientNo) {
 	this.socket = socket;
@@ -75,28 +48,129 @@ class handleClient implements Runnable {
 		DataOutputStream out = new DataOutputStream(socket.getOutputStream());
 		System.out.println("Run once");
 		System.out.println(clientNo);
-		//out.writeInt(clientNo);
-		shuffleDeck(taken);
 		while(true) {
 				int response = in.readInt();
-				if (response == 0) {
-					x = 0;
-					hits = 0;
-					playerCard1 = 0;
-					playerCard2 = 0;
-					playerCard3 = 0;
-					playerCard4 = 0;
-					playerCard5 = 0;
-					playerCards = 0;
-					dealerCard1 = 0;
-					dealerCard2 = 0;
-					dealerCard3 = 0;
-					dealerCards = 0;
-					System.out.println("Reset");
-					boolean taken[] = new boolean[52];
-					shuffleDeck(taken);
-				}
-				if (response == 1 && playerCard1 == 0 && playerCard2 == 0 && playerCards == 0 && dealerCard1 == 0 && dealerCard2 == 0 && dealerCards == 0) {
+					if (response == 0) {
+						hits1 = 0;
+						hits2 = 0;
+						hits3 = 0;
+						Arrays.fill(player1Cards, -1);
+						Arrays.fill(player2Cards, -1);
+						Arrays.fill(player3Cards, -1);
+						Arrays.fill(dealerCards1, -1);
+						/*playerCard1 = 0;
+						playerCard2 = 0;
+						playerCard3 = 0;
+						playerCard4 = 0;
+						playerCard5 = 0;
+						playerCards = 0;
+						dealerCard1 = 0;
+						dealerCard2 = 0;
+						dealerCard3 = 0;
+						dealerCards = 0;*/
+					}
+
+					if (response == 1) {
+						player1Ready = in.readBoolean();
+						System.out.println("1 " + player1Ready);
+						System.out.println("2 " + player2Ready);
+						System.out.println("3 " + player3Ready);
+						if (player2Ready == false && player3Ready == false) {
+							shuffleDeck(taken);
+							assignCards(player1Cards,player2Cards,player3Cards,dealerCards1);
+							dealCards(out);
+						} else {
+							dealCards(out);
+						}
+					} else if (response == 2) {
+						player2Ready = in.readBoolean();
+						System.out.println("1 " + player1Ready);
+						System.out.println("2 " + player2Ready);
+						System.out.println("3 " + player3Ready);
+						if (player1Ready == false && player3Ready == false) {
+							shuffleDeck(taken);
+							assignCards(player1Cards,player2Cards,player3Cards,dealerCards1);
+							dealCards(out);
+						} else {
+							dealCards(out);
+						}
+					} else if (response == 3) {
+						player3Ready = in.readBoolean();
+						System.out.println("1 " + player1Ready);
+						System.out.println("2 " + player2Ready);
+						System.out.println("3 " + player3Ready);
+						if (player1Ready == false && player2Ready == false) {
+							shuffleDeck(taken);
+							assignCards(player1Cards,player2Cards,player3Cards,dealerCards1);
+							dealCards(out);
+						} else {
+							dealCards(out);
+						}
+					}
+					if (response == 4) {
+						hitRequest1(out);
+					}
+					if (response == 5) {
+						hitRequest2(out);
+					}if (response == 6) {
+						hitRequest3(out);
+					}
+					/*if (response == 4 && player1CardsValue < 21 && hits1 == 0) {
+						hits1++;
+						player1CardsValue = player1CardsValue + cardValue[player1Cards[2]];
+						int aces = 0;
+						if (player1Cards[2] == 12 || player1Cards[2] == 25 || player1Cards[2] == 38 || player1Cards[2] == 51) {
+							aces++;
+						}
+						if (player1CardsValue > 21 && aces > 0) {
+							player1CardsValue = player1CardsValue -10;
+							aces--;
+							out.writeInt(player1Cards[2]);
+							out.writeInt(player1CardsValue);
+						} else {
+							player1CardsValue = player1CardsValue;
+							out.writeInt(player1Cards[2]);
+							out.writeInt(player1CardsValue);
+						}
+					} else if (response == 4 && player1CardsValue < 21 && hits1 == 1) {
+						hits1++;
+						player1CardsValue = player1CardsValue + cardValue[player1Cards[3]];
+						int aces = 0;
+						if (player1Cards[3] == 12 || player1Cards[3] == 25 || player1Cards[3] == 38 || player1Cards[3] == 51) {
+							aces++;
+						}
+						if (player1CardsValue > 21 && aces > 0) {
+							player1CardsValue = player1CardsValue -10;
+							aces--;
+							out.writeInt(player1Cards[3]);
+							out.writeInt(player1CardsValue);
+						} else {
+							player1CardsValue = player1CardsValue;
+							out.writeInt(player1Cards[3]);
+							out.writeInt(player1CardsValue);
+						}
+					} else if (response == 4 && player1CardsValue < 21 && hits1 == 2) {
+						hits1++;
+						player1CardsValue = player1CardsValue + cardValue[player1Cards[4]];
+						int aces = 0;
+						if (player1Cards[4] == 12 || player1Cards[4] == 25 || player1Cards[4] == 38 || player1Cards[4] == 51) {
+							aces++;
+						}
+						if (player1CardsValue > 21 && aces > 0) {
+							player1CardsValue = player1CardsValue -10;
+							aces--;
+							out.writeInt(player1Cards[4]);
+							out.writeInt(player1CardsValue);
+						} else {
+							player1CardsValue = player1CardsValue;
+							out.writeInt(player1Cards[4]);
+							out.writeInt(player1CardsValue);
+						}
+					}*/
+
+					
+
+				/*if (response == 1 && playerCard1 == 0 && playerCard2 == 0 && playerCards == 0 && dealerCard1 == 0 && dealerCard2 == 0 && dealerCards == 0) {
 					playerCard1 = cardNumber[x++];
 					playerCard2 = cardNumber[x++];
 					playerCards = cardValue[playerCard1] + cardValue[playerCard2];
@@ -262,14 +336,14 @@ class handleClient implements Runnable {
 						out.writeInt(dealerCards);
 					}
 				}
-				}
+				}*/
 		}
 	} catch (Exception e) {
 			e.printStackTrace();
 		}
 	}
 	
-	public int drawCard(boolean [] taken) throws IOException {
+	public int drawCard() throws IOException {
 		int i = random.nextInt(52);
 		while(taken[i]) {
 			i = random.nextInt(52);
@@ -280,7 +354,7 @@ class handleClient implements Runnable {
 	
 	public void shuffleDeck(boolean [] taken) throws IOException {
 		for (int i = 0; i < cardNumber.length; i++) {
-			cardNumber[i] = drawCard(taken);
+			cardNumber[i] = drawCard();
 		}
 		System.out.println(Arrays.toString(cardNumber));
 	}
@@ -297,5 +371,192 @@ class handleClient implements Runnable {
 		System.out.println(Arrays.toString(player2Cards));
 		System.out.println(Arrays.toString(player3Cards));
 		System.out.println(Arrays.toString(dealerCards1));
+	}
+	
+	public void dealCards(DataOutputStream out) throws IOException {
+		player1CardsValue = cardValue[player1Cards[0]] + cardValue[player1Cards[1]];
+		player2CardsValue = cardValue[player2Cards[0]] + cardValue[player2Cards[1]];
+		player3CardsValue = cardValue[player3Cards[0]] + cardValue[player3Cards[1]];
+		dealerCardsValue = cardValue[dealerCards1[0]] + cardValue[dealerCards1[1]];
+		
+		out.writeInt(player1Cards[0]);
+		out.writeInt(player1Cards[1]);
+		out.writeInt(player1CardsValue);
+
+		out.writeInt(player2Cards[0]);
+		out.writeInt(player2Cards[1]);
+		out.writeInt(player2CardsValue);
+		
+		out.writeInt(player3Cards[0]);
+		out.writeInt(player3Cards[1]);
+		out.writeInt(player3CardsValue);
+		
+		out.writeInt(dealerCards1[0]);
+		out.writeInt(dealerCards1[1]);
+		out.writeInt(cardValue[dealerCards1[0]]);
+		out.writeInt(dealerCardsValue);
+	}
+	
+	public void hitRequest1(DataOutputStream out) throws IOException {
+		if (player1CardsValue < 21 && hits1 == 0) {
+			hits1++;
+			player1CardsValue = player1CardsValue + cardValue[player1Cards[2]];
+			int aces = 0;
+			if (player1Cards[2] == 12 || player1Cards[2] == 25 || player1Cards[2] == 38 || player1Cards[2] == 51) {
+				aces++;
+			}
+			if (player1CardsValue > 21 && aces > 0) {
+				player1CardsValue = player1CardsValue -10;
+				aces--;
+				out.writeInt(player1Cards[2]);
+				out.writeInt(player1CardsValue);
+			} else {
+				player1CardsValue = player1CardsValue;
+				out.writeInt(player1Cards[2]);
+				out.writeInt(player1CardsValue);
+			}
+		} else if (player1CardsValue < 21 && hits1 == 1) {
+			hits1++;
+			player1CardsValue = player1CardsValue + cardValue[player1Cards[3]];
+			int aces = 0;
+			if (player1Cards[3] == 12 || player1Cards[3] == 25 || player1Cards[3] == 38 || player1Cards[3] == 51) {
+				aces++;
+			}
+			if (player1CardsValue > 21 && aces > 0) {
+				player1CardsValue = player1CardsValue -10;
+				aces--;
+				out.writeInt(player1Cards[3]);
+				out.writeInt(player1CardsValue);
+			} else {
+				player1CardsValue = player1CardsValue;
+				out.writeInt(player1Cards[3]);
+				out.writeInt(player1CardsValue);
+			}
+		} else if (player1CardsValue < 21 && hits1 == 2) {
+			hits1++;
+			player1CardsValue = player1CardsValue + cardValue[player1Cards[4]];
+			int aces = 0;
+			if (player1Cards[4] == 12 || player1Cards[4] == 25 || player1Cards[4] == 38 || player1Cards[4] == 51) {
+				aces++;
+			}
+			if (player1CardsValue > 21 && aces > 0) {
+				player1CardsValue = player1CardsValue -10;
+				aces--;
+				out.writeInt(player1Cards[4]);
+				out.writeInt(player1CardsValue);
+			} else {
+				player1CardsValue = player1CardsValue;
+				out.writeInt(player1Cards[4]);
+				out.writeInt(player1CardsValue);
+			}
+		}
+	}
+	public void hitRequest2(DataOutputStream out) throws IOException {
+		if (player2CardsValue < 21 && hits2 == 0) {
+			hits2++;
+			player2CardsValue = player2CardsValue + cardValue[player2Cards[2]];
+			int aces = 0;
+			if (player2Cards[2] == 12 || player2Cards[2] == 25 || player2Cards[2] == 38 || player2Cards[2] == 51) {
+				aces++;
+			}
+			if (player2CardsValue > 21 && aces > 0) {
+				player2CardsValue = player2CardsValue -10;
+				aces--;
+				out.writeInt(player2Cards[2]);
+				out.writeInt(player2CardsValue);
+			} else {
+				player2CardsValue = player2CardsValue;
+				out.writeInt(player2Cards[2]);
+				out.writeInt(player2CardsValue);
+			}
+		} else if (player2CardsValue < 21 && hits2 == 1) {
+			hits2++;
+			player2CardsValue = player2CardsValue + cardValue[player2Cards[3]];
+			int aces = 0;
+			if (player2Cards[3] == 12 || player2Cards[3] == 25 || player2Cards[3] == 38 || player2Cards[3] == 51) {
+				aces++;
+			}
+			if (player2CardsValue > 21 && aces > 0) {
+				player2CardsValue = player2CardsValue -10;
+				aces--;
+				out.writeInt(player2Cards[3]);
+				out.writeInt(player2CardsValue);
+			} else {
+				player2CardsValue = player2CardsValue;
+				out.writeInt(player2Cards[3]);
+				out.writeInt(player2CardsValue);
+			}
+		} else if (player2CardsValue < 21 && hits2 == 2) {
+			hits2++;
+			player2CardsValue = player2CardsValue + cardValue[player2Cards[4]];
+			int aces = 0;
+			if (player2Cards[4] == 12 || player2Cards[4] == 25 || player2Cards[4] == 38 || player2Cards[4] == 51) {
+				aces++;
+			}
+			if (player2CardsValue > 21 && aces > 0) {
+				player2CardsValue = player2CardsValue -10;
+				aces--;
+				out.writeInt(player2Cards[4]);
+				out.writeInt(player2CardsValue);
+			} else {
+				player2CardsValue = player2CardsValue;
+				out.writeInt(player2Cards[4]);
+				out.writeInt(player2CardsValue);
+			}
+		}
+	}
+	public void hitRequest3(DataOutputStream out) throws IOException {
+		if (player3CardsValue < 21 && hits3 == 0) {
+			hits3++;
+			player3CardsValue = player3CardsValue + cardValue[player3Cards[2]];
+			int aces = 0;
+			if (player3Cards[2] == 12 || player3Cards[2] == 25 || player3Cards[2] == 38 || player3Cards[2] == 51) {
+				aces++;
+			}
+			if (player3CardsValue > 21 && aces > 0) {
+				player3CardsValue = player3CardsValue -10;
+				aces--;
+				out.writeInt(player3Cards[2]);
+				out.writeInt(player3CardsValue);
+			} else {
+				player3CardsValue = player3CardsValue;
+				out.writeInt(player3Cards[2]);
+				out.writeInt(player3CardsValue);
+			}
+		} else if (player3CardsValue < 21 && hits3 == 1) {
+			hits3++;
+			player3CardsValue = player3CardsValue + cardValue[player3Cards[3]];
+			int aces = 0;
+			if (player3Cards[3] == 12 || player3Cards[3] == 25 || player3Cards[3] == 38 || player3Cards[3] == 51) {
+				aces++;
+			}
+			if (player3CardsValue > 21 && aces > 0) {
+				player3CardsValue = player3CardsValue -10;
+				aces--;
+				out.writeInt(player3Cards[3]);
+				out.writeInt(player3CardsValue);
+			} else {
+				player3CardsValue = player3CardsValue;
+				out.writeInt(player3Cards[3]);
+				out.writeInt(player3CardsValue);
+			}
+		} else if (player3CardsValue < 21 && hits3 == 2) {
+			hits3++;
+			player3CardsValue = player3CardsValue + cardValue[player3Cards[4]];
+			int aces = 0;
+			if (player3Cards[4] == 12 || player3Cards[4] == 25 || player3Cards[4] == 38 || player3Cards[4] == 51) {
+				aces++;
+			}
+			if (player3CardsValue > 21 && aces > 0) {
+				player3CardsValue = player3CardsValue -10;
+				aces--;
+				out.writeInt(player3Cards[4]);
+				out.writeInt(player3CardsValue);
+			} else {
+				player3CardsValue = player3CardsValue;
+				out.writeInt(player3Cards[4]);
+				out.writeInt(player3CardsValue);
+			}
+		}
 	}
 }
