@@ -75,8 +75,8 @@ class handleClient implements Runnable {
 		DataOutputStream out = new DataOutputStream(socket.getOutputStream());
 		System.out.println("Run once");
 		System.out.println(clientNo);
-		out.writeInt(clientNo);
-		
+		//out.writeInt(clientNo);
+		shuffleDeck(taken);
 		while(true) {
 				int response = in.readInt();
 				if (response == 0) {
