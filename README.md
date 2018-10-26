@@ -3,7 +3,7 @@
 ## Client
 [Client Github](https://github.com/kmortensenf/MiniProjectClient)
 
-## How to run the game
+## How to run the project?
 
 To make this project work you must either:
 
