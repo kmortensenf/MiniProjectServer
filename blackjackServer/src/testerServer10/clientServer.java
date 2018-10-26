@@ -1,5 +1,8 @@
 package testerServer10;
 
+import java.io.DataOutputStream;
+import java.io.IOException;
+import java.util.Arrays;
 import java.util.Random;
 
 public class clientServer {
@@ -24,8 +27,11 @@ public class clientServer {
 	public static int hits1 = 0;
 	public static int hits2 = 0;
 	public static int hits3 = 0;
+	public static int dealerHits = 0;
 	
 	public static Random random = new Random();
 	public static boolean taken[] = new boolean[52];
+	
+	public static int clientsConnected = 0;
 	
 }

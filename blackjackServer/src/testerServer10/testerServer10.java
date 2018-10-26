@@ -38,8 +38,8 @@ class handleClient extends clientServer implements Runnable{
 	private int clientNo;
 
 	public handleClient(Socket socket, int clientNo) {
-	this.socket = socket;
-	this.clientNo = clientNo;
+		this.socket = socket;
+		this.clientNo = clientNo;
 	}
 	
 	public void run() {
@@ -48,12 +48,14 @@ class handleClient extends clientServer implements Runnable{
 		DataOutputStream out = new DataOutputStream(socket.getOutputStream());
 		System.out.println("Run once");
 		System.out.println(clientNo);
+		System.out.println(Thread.activeCount());
 		while(true) {
 				int response = in.readInt();
 					if (response == 0) {
 						hits1 = 0;
 						hits2 = 0;
 						hits3 = 0;
+						dealerHits = 0;
 						Arrays.fill(player1Cards, -1);
 						Arrays.fill(player2Cards, -1);
 						Arrays.fill(player3Cards, -1);
@@ -69,7 +71,6 @@ class handleClient extends clientServer implements Runnable{
 						dealerCard3 = 0;
 						dealerCards = 0;*/
 					}
-
 					if (response == 1) {
 						player1Ready = in.readBoolean();
 						System.out.println("1 " + player1Ready);
@@ -81,6 +82,7 @@ class handleClient extends clientServer implements Runnable{
 							dealCards(out);
 						} else {
 							dealCards(out);
+						
 						}
 					} else if (response == 2) {
 						player2Ready = in.readBoolean();
@@ -106,7 +108,7 @@ class handleClient extends clientServer implements Runnable{
 						} else {
 							dealCards(out);
 						}
-					}
+					} 
 					if (response == 4) {
 						hitRequest1(out);
 					}
@@ -115,6 +117,60 @@ class handleClient extends clientServer implements Runnable{
 					}if (response == 6) {
 						hitRequest3(out);
 					}
+					if (response == 7) {
+						if (dealerCardsValue < 17 && dealerHits == 0) {
+							dealerHits++;
+							dealerCardsValue = dealerCardsValue + cardValue[dealerCards1[2]];
+							int aces = 0;
+							if (dealerCards1[2] == 12 || dealerCards1[2] == 25 || dealerCards1[2] == 38 || dealerCards1[2] == 51) {
+								aces++;
+							}
+							if (dealerCardsValue > 21 && aces > 0) {
+								dealerCardsValue = dealerCardsValue - 10;
+								aces--;
+								out.writeInt(dealerCards1[2]);
+								out.writeInt(dealerCardsValue);
+							} else {
+								dealerCardsValue = dealerCardsValue;
+								out.writeInt(dealerCards1[2]);
+								out.writeInt(dealerCardsValue);
+							}
+						} else if (dealerCardsValue < 17 && dealerHits == 1) {
+							dealerHits++;
+							dealerCardsValue = dealerCardsValue + cardValue[dealerCards1[3]];
+							int aces = 0;
+							if (dealerCards1[3] == 12 || dealerCards1[3] == 25 || dealerCards1[3] == 38 || dealerCards1[3] == 51) {
+								aces++;
+							}
+							if (dealerCardsValue > 21 && aces > 0) {
+								dealerCardsValue = dealerCardsValue - 10;
+								aces--;
+								out.writeInt(dealerCards1[3]);
+								out.writeInt(dealerCardsValue);
+							} else {
+								dealerCardsValue = dealerCardsValue;
+								out.writeInt(dealerCards1[3]);
+								out.writeInt(dealerCardsValue);
+							}
+							} else if (dealerCardsValue < 17 && dealerHits == 2) {
+								dealerHits++;
+								dealerCardsValue = dealerCardsValue + cardValue[dealerCards1[4]];
+								int aces = 0;
+								if (dealerCards1[4] == 12 || dealerCards1[4] == 25 || dealerCards1[4] == 38 || dealerCards1[4] == 51) {
+									aces++;
+								}
+								if (dealerCardsValue > 21 && aces > 0) {
+									dealerCardsValue = dealerCardsValue - 10;
+									aces--;
+									out.writeInt(dealerCards1[4]);
+									out.writeInt(dealerCardsValue);
+								} else {
+									dealerCardsValue = dealerCardsValue;
+									out.writeInt(dealerCards1[4]);
+									out.writeInt(dealerCardsValue);
+							}
+							}
+								
 					/*if (response == 4 && player1CardsValue < 21 && hits1 == 0) {
 						hits1++;
 						player1CardsValue = player1CardsValue + cardValue[player1Cards[2]];
@@ -337,6 +393,7 @@ class handleClient extends clientServer implements Runnable{
 					}
 				}
 				}*/
+		}
 		}
 	} catch (Exception e) {
 			e.printStackTrace();
