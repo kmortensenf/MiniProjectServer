@@ -37,7 +37,7 @@ Once a connection has been established it can be used to transfer data in both d
 
 In the blackjack game, once the connection has been established, the client sends requests to the server based on which buttons the user has clicked, either Deal Cards, Hit, Stand, Reset etc.
 
-Dependent on what data is transfered to the server, it will know what send back to the client. And the client will in turn know what to do with the data received from the server.
+Dependent on what data is transfered to the server, it will know what to send back to the client. And the client will in turn know what to do with the data received from the server.
 
 ## Contributors
 
